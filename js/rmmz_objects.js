@@ -1914,6 +1914,10 @@ Game_Action.prototype.apply = function(target) {
     this.updateLastTarget(target);
 };
 
+/**
+ * Damage calculation
+ */
+
 Game_Action.prototype.makeDamageValue = function(target, critical) {
     const item = this.item();
     const baseValue = this.evalDamageFormula(target);
