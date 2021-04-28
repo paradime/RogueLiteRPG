@@ -1,6 +1,9 @@
 // var ActorFile = require('./data/Actors.json')
 var ClassesFile = require('../data/Classes.json')
 var EnemiesFile = require('../data/Enemies.json')
+var HeroClass = require('./Classes/hero.js').class
+var SwordsmanClass = require('./Classes/swordsman').class
+var RangerClass = require('./Classes/ranger').class
 
 /**
  * Utilities
@@ -39,27 +42,42 @@ var regularDamage = function(a, b) {
 var convertSpeed = function(a) {
     return a.agi/100;
 }
-var heroDptFormula = function(heroStats, enemyStats) {
-    return regularDamage(heroStats, enemyStats) * convertSpeed(heroStats) * 1;
-}
 
 /**
  * Script
  */
-var className = 'Hero';
+// ENEMY
 var enemyName = 'D1 Boss';
-
-// var cleric = ActorFile.find(actor => (actor != null) ? actor.name === 'Cleric' : false)
-class1 = findClass(className)
-
-console.log(className + ":")
-console.log(getClassStats(class1, 10))
-var class1Stats = getClassStats(class1, 10)
-
 var enemy = findEnemy(enemyName)
 console.log(enemyName + ":")
 console.log(getEnemyStats(enemy))
 var crowEnemyStats = getEnemyStats(enemy)
 
-console.log("Damage per turn:")
-console.log(heroDptFormula(class1Stats, crowEnemyStats))
+// Get Class Stats 1
+var printDamage = function(classFile) {
+    class1 = findClass(classFile.className)
+    console.log(classFile.className + ":")
+    // console.log(getClassStats(class1, 15))
+    var class1Stats = getClassStats(class1, 15)
+    console.log("Base Damage:")
+    console.log(regularDamage(class1Stats,crowEnemyStats))
+    console.log("Damage per turn:")
+    damagePerTurn = (classFile.dptFormula(
+        class1Stats,
+        crowEnemyStats,
+        regularDamage,
+        convertSpeed
+        )
+    )
+    console.log(damagePerTurn + "\n")
+    return damagePerTurn
+}
+party1dpt = printDamage(HeroClass);
+party2dpt = printDamage(SwordsmanClass);
+party3dpt = printDamage(RangerClass);
+rawGroupDPT = party1dpt + party2dpt + party3dpt;
+console.log("Raw group dpt: " + rawGroupDPT)
+totalGroupDPT = rawGroupDPT * RangerClass.groupBonusDmg;
+console.log("Total group dpt: " + totalGroupDPT)
+console.log("Bonus DPT: " + (totalGroupDPT - rawGroupDPT))
+console.log("TTK: " + crowEnemyStats.hp / totalGroupDPT)
