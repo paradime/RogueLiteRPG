@@ -9,11 +9,13 @@ null,
 {"id":7,"expanded":true,"name":"MAP0-2 (save)","order":7,"parentId":3,"scrollX":0,"scrollY":0},
 {"id":8,"expanded":true,"name":"MAP0-3 (boss)","order":8,"parentId":3,"scrollX":0,"scrollY":0},
 {"id":9,"expanded":false,"name":"Overworld Map","order":9,"parentId":0,"scrollX":0,"scrollY":0},
-{"id":10,"expanded":true,"name":"MAP0-0 (Dungeon 1)","order":10,"parentId":0,"scrollX":0,"scrollY":0},
+{"id":10,"expanded":true,"name":"MAP0-0 (Dungeon 1)","order":10,"parentId":0,"scrollX":1390.2857142857142,"scrollY":790.2857142857142},
 {"id":11,"expanded":true,"name":"MAP0-1 (Dungeon 1)","order":11,"parentId":10,"scrollX":0,"scrollY":0},
 {"id":12,"expanded":true,"name":"MAP1-1 (Dungeon 1)","order":12,"parentId":10,"scrollX":0,"scrollY":0},
 {"id":13,"expanded":false,"name":"MAP2-1 (m) (Dungeon 1)","order":13,"parentId":10,"scrollX":0,"scrollY":0},
 {"id":14,"expanded":true,"name":"MAP0-2 (save) (Dungeon 1)","order":14,"parentId":10,"scrollX":0,"scrollY":0},
 {"id":15,"expanded":true,"name":"MAP0-3 (boss) (Dungeon 1)","order":15,"parentId":10,"scrollX":0,"scrollY":0},
-{"id":16,"expanded":false,"name":"Hubworld","order":16,"parentId":0,"scrollX":0,"scrollY":0}
+{"id":16,"expanded":false,"name":"Hubworld","order":16,"parentId":0,"scrollX":0,"scrollY":0},
+{"id":17,"expanded":false,"name":"Volcano","order":17,"parentId":0,"scrollX":1216.5,"scrollY":1051.5},
+{"id":18,"expanded":false,"name":"BST Forest","order":18,"parentId":0,"scrollX":2433,"scrollY":3237}
 ]
