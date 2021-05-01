@@ -104,7 +104,7 @@ var enemies = [enemyName4];
 var enemyStats = getStatsAsGroupStats(enemies.map(eName => getEnemyStats(findEnemy(eName))));
 
 // PARTY DATA
-var lvl = 4
+var lvl = 5
 var party = [HeroClass, SwordsmanClass, RangerClass]
 
 // CALCULATIONS
