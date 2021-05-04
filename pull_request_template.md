@@ -1,2 +1,2 @@
 Deployment checklist:
-[] - Turn title screen back on!
+- [] Turn title screen back on!
