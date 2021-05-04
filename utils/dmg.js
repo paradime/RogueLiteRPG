@@ -100,7 +100,7 @@ var enemyName1 = 'Blue Wolf';
 var enemyName2 = 'Blue Crab';
 var enemyName3 = 'Evil Tree';
 var enemyName4 = 'Blue Hydra';
-var enemies = [enemyName4];
+var enemies = [enemyName3];
 var enemyStats = getStatsAsGroupStats(enemies.map(eName => getEnemyStats(findEnemy(eName))));
 
 // PARTY DATA

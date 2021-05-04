@@ -54,4 +54,10 @@
         return damage * 1.5;
     };
 
+    var customFunctions = {}
+    customFunctions.pearl = function() { console.log("hello"); }
+    customFunctions.maxHp = function() { return 999; }
+    //
+    window.customFunctions = customFunctions 
+
 })();
