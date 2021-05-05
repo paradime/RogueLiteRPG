@@ -1,6 +1,6 @@
 // var ActorFile = require('./data/Actors.json')
-var ClassesFile = require('../data/Classes.json')
-var EnemiesFile = require('../data/Enemies.json')
+var ClassesFile = require('../Game/data/Classes.json')
+var EnemiesFile = require('../Game/data/Enemies.json')
 var HeroClass = require('./Classes/hero.js').class
 var SwordsmanClass = require('./Classes/swordsman').class
 var RangerClass = require('./Classes/ranger').class
@@ -100,7 +100,7 @@ var enemyName1 = 'Blue Wolf';
 var enemyName2 = 'Blue Crab';
 var enemyName3 = 'Evil Tree';
 var enemyName4 = 'Blue Hydra';
-var enemies = [enemyName4];
+var enemies = [enemyName3];
 var enemyStats = getStatsAsGroupStats(enemies.map(eName => getEnemyStats(findEnemy(eName))));
 
 // PARTY DATA
