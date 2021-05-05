@@ -1,6 +1,6 @@
 // var ActorFile = require('./data/Actors.json')
-var ClassesFile = require('../data/Classes.json')
-var EnemiesFile = require('../data/Enemies.json')
+var ClassesFile = require('../Game/data/Classes.json')
+var EnemiesFile = require('../Game/data/Enemies.json')
 var HeroClass = require('./Classes/hero.js').class
 var SwordsmanClass = require('./Classes/swordsman').class
 var RangerClass = require('./Classes/ranger').class

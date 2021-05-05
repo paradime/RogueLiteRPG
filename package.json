@@ -8,5 +8,9 @@
         "height": 624,
         "position": "center",
         "icon": "icon/icon.png"
+    },
+    "scripts": { "test": "jasmine" },
+    "devDependencies": {
+        "jasmine": "^3.7.0"
     }
 }
