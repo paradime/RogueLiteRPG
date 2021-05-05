@@ -21,11 +21,11 @@
     /**
      * Skip title screen
      */
-    // Scene_Boot.prototype.startNormalGame = function() {
-    //     this.checkPlayerLocation();
-    //     DataManager.setupNewGame();
-    //     SceneManager.goto(Scene_Map);
-    // };
+    Scene_Boot.prototype.startNormalGame = function() {
+        this.checkPlayerLocation();
+        DataManager.setupNewGame();
+        SceneManager.goto(Scene_Map);
+    };
 
     /**
      * Change Speed function to be linear instead of the default sqrt
@@ -53,11 +53,5 @@
     Game_Action.prototype.applyCritical = function(damage) {
         return damage * 1.5;
     };
-
-    var customFunctions = {}
-    customFunctions.pearl = function() { console.log("hello"); }
-    customFunctions.maxHp = function() { return 999; }
-    //
-    window.customFunctions = customFunctions 
 
 })();
