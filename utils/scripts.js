@@ -76,3 +76,28 @@ Http.onreadystatechange = (e) => {
 (() => {
 
 })
+
+$gameVariables.setValue(101, `
+    var mat = $gameActors._data.find(actor => (actor != null) ? actor._name === "Druid" : false).mat;
+    $gameVariables.setValue(102, Math.round(mat*2*(1/3)));
+`);
+$gameVariables.setValue(106, `
+  this._result.clear();
+  this._result.used = this._result.success = this._result.hpAffected = true;
+  this.gainHp($gameVariables._data[107]);
+  this.startDamagePopup();
+  $gameVariables.setValue(107, 0);
+  $gameTemp.requestBattleRefresh();
+`);
+hpToAdd += this.states().find(st => st.id === 34) ? $gameVariables._data[105] : 0; // wild growth
+hpToAdd += this.states().find(st => st.id === 33) ? $gameVariables._data[102] : 0; // life bloom
+                this._result.clear();
+                this._result.used = this._result.success = this._result.hpAffected = true;
+                hpToAdd = 0;
+                hpToAdd += this.states().find(st => st.id === 34) ? $gameVariables._data[105] : 0; // wild growth
+                hpToAdd += this.states().find(st => st.id === 33) ? $gameVariables._data[102] : 0; // life bloom  
+                if(hpToAdd > 0) {
+                    this.gainHp(hpToAdd);
+                    this.startDamagePopup();
+                    $gameTemp.requestBattleRefresh();
+                }

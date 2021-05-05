@@ -56,4 +56,77 @@ describe("Combat Functions", function() {
 
     })
   })
+
+  describe("Druid", () => {
+    describe("Lifebloom Ticks", () => {
+      it("calculates 1 tick correctly", () => {
+        a = {mat: 9}
+        result = CombatFunctions.druid.lifebloomTick(a)
+        expect(result).toBe(6)
+      })
+    })
+    describe("Wild Growth Ticks", () => {
+      it("calculates 1 tick correctly", () => {
+        a = {mat: 9}
+        result = CombatFunctions.druid.wildGrowthTick(a)
+        expect(result).toBe(1)
+      })
+    })
+    describe("Regrowth", () => {
+      it("calculates correctly", () => {
+        a = {mat: 10}
+        result = CombatFunctions.druid.regrowth(a)
+        expect(result).toBe(5)
+      })
+    })
+  })
+
+  describe("Hero", () => {
+    describe("Flash Of Light", () => {
+      it("calculates correctly", () => {
+        a = {mat: 10}
+        result = CombatFunctions.hero.flashOfLight(a)
+        expect(result).toBe(10)
+      })
+    })
+  })
+
+  describe("Swordsman", () => {
+    describe("Enrage", () => {
+      it("calculates correctly", () => {
+        a = {mhp: 100}
+        result = CombatFunctions.swordsman.enrage(a)
+        expect(result).toBe(5)
+      })
+    })
+  })
+
+  describe("Ranger", () => {
+    describe("Aimed Shot", () => {
+      it("calculates correctly", () => {
+        a = {atk: 100};
+        b = {def: 100};
+        result = CombatFunctions.ranger.aimedShot(a,b)
+        expect(result).toBe(250)
+      })
+    })
+  })
+
+  describe("Cleric", () => {
+    describe("Flash Heal", () => {
+      it("calculates correctly", () => {
+        a = {mat: 10}
+        result = CombatFunctions.cleric.flashHeal(a)
+        expect(result).toBe(10)
+      })
+    })
+
+    describe("Holy Light", () => {
+      it("calculates correctly", () => {
+        a = {mat: 10}
+        result = CombatFunctions.cleric.holyLight(a)
+        expect(result).toBe(30)
+      })
+    })
+  })
 });
