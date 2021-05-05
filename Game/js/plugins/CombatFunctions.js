@@ -1,8 +1,8 @@
 /*:
- * @target MZ
- * @plugindesc Makes it so the default title screen is skipped when booting up the game and after a gameover.
- * @author
- */
+* @target MZ
+* @plugindesc Makes it so the default title screen is skipped when booting up the game and after a gameover.
+* @author
+*/
 
 (function() {
 const regularDmg = (a, b) => a.atk - (b.def/2)
@@ -65,7 +65,6 @@ const CombatFunctions = {
         }
     }
 };
-
 
 window.CombatFunctions = CombatFunctions
 })();

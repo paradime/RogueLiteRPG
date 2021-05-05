@@ -9,7 +9,7 @@
         "position": "center",
         "icon": "icon/icon.png"
     },
-    "scripts": { "test": "jasmine" },
+    "scripts": { "test": "jasmine", "export": "node ./utils/export_plugin.js"},
     "devDependencies": {
         "jasmine": "^3.7.0"
     }
