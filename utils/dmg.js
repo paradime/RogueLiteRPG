@@ -81,9 +81,9 @@ var party = [HeroClass, SwordsmanClass, RangerClass]
 
 // CALCULATIONS
 // console.log("------------- PARTY DAMGE --------------")
-var partyDMG = party.map(cl => printDamage(cl, lvl, enemyStats));
-var rawGroupDPT = partyDMG.reduce((a,b)=> a+b, 0);
-var totalGroupDPT = rawGroupDPT * RangerClass.groupBonusDmg;
+// var partyDMG = party.map(cl => printDamage(cl, lvl, enemyStats));
+// var rawGroupDPT = partyDMG.reduce((a,b)=> a+b, 0);
+// var totalGroupDPT = rawGroupDPT * RangerClass.groupBonusDmg;
 // console.log("Raw group dpt: " + rawGroupDPT)
 // console.log("Total group dpt: " + totalGroupDPT)
 // console.log("Bonus DPT: " + (totalGroupDPT - rawGroupDPT))
@@ -91,10 +91,10 @@ var totalGroupDPT = rawGroupDPT * RangerClass.groupBonusDmg;
 
 //console.log("------------- ENEMY DAMAGE --------------")
 
-var partyStats = getStatsAsGroupStats(party.map(cl => FileParsing.getClassStatsFromFile(cl, lvl)))
-var rawEnemyDPT = enemies
-    .map(e => printEnemyDamage(e, partyStats))
-    .reduce(sum, 0);
+// var partyStats = getStatsAsGroupStats(party.map(cl => FileParsing.getClassStatsFromFile(cl, lvl)))
+// var rawEnemyDPT = enemies
+//     .map(e => printEnemyDamage(e, partyStats))
+//     .reduce(sum, 0);
 // console.log("party stats")
 // console.log(partyStats)
 // console.log("Raw Enemy dpt: " + rawEnemyDPT);
