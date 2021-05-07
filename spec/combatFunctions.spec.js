@@ -1,4 +1,4 @@
-var CombatFunctions = require('./testFile');
+var CombatFunctions = require('../utils/GameScripts/CombatFunctions');
 describe("Combat Functions", function() {
 
   describe("regular damage", () => {

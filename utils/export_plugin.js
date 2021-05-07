@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-fs.readFile('./spec/testFile.js', 'utf8', (err, data) => {
+fs.readFile('./utils/GameScripts/CombatFunctions.js', 'utf8', (err, data) => {
   if (err) {
     console.error(err)
     return

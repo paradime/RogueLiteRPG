@@ -1,56 +1,24 @@
 // var ActorFile = require('./data/Actors.json')
-var ClassesFile = require('../Game/data/Classes.json')
-var EnemiesFile = require('../Game/data/Enemies.json')
 var HeroClass = require('./Classes/hero.js').class
 var SwordsmanClass = require('./Classes/swordsman').class
 var RangerClass = require('./Classes/ranger').class
 var BasicEnemy = require('./Enemies/Basic').enemy
+var FileParsing = require('./FileParsing')
+var CombatFunctions = require('./GameScripts/CombatFunctions');
 
 /**
  * Utilities
  */
-// File Parsing
-var findClass = function(className) {
-    return ClassesFile.find(cl => (cl != null) ? cl.name == className : false)
-}
-
-var findEnemy = function(enemyName) {
-    return EnemiesFile.find(enemy => (enemy != null) ? enemy.name == enemyName : false)
-}
-// Stat extraction
-var getClassStats = function(cl, level) {
-    var stats = {}
-    statOrder = ['hp', 'mp', 'atk', 'def', 'mat', 'mdf', 'agi', 'luk']
-    for(i in statOrder) {
-        stats[statOrder[i]] = cl.params[i][level]
-    }
-    return stats
-}
-
-var getEnemyStats = function(enemy) {
-    var stats = {}
-    statOrder = ['hp', 'mp', 'atk', 'def', 'mat', 'mdf', 'agi', 'luk']
-    for(i in statOrder) {
-        stats[statOrder[i]] = enemy.params[i]
-    }
-    return stats
-}
 
 // Damage Calculation
-var regularDamage = function(a, b) {
-    return a.atk - (b.def/2)
-}
+var regularDamage = CombatFunctions.regularDamage 
 var convertSpeed = function(a) {
     return a.agi/100;
 }
 
-var getClassStatsFromFile = function(classFile, level) {
-    class1 = findClass(classFile.className);
-    return classStats = getClassStats(class1, level);
-}
 // Get Class Stats 1
 var printDamage = function(classFile, level, enemyStats) {
-    var class1Stats = getClassStatsFromFile(classFile, level)
+    var class1Stats = FileParsing.getClassStatsFromFile(classFile, level)
     console.log(classFile.className + ":")
     console.log("Base Damage:")
     console.log(regularDamage(class1Stats,enemyStats))
@@ -67,10 +35,9 @@ var printDamage = function(classFile, level, enemyStats) {
 }
 
 var printEnemyDamage = function(eName, partyStats) {
-    var enemy = findEnemy(eName)
+    var enemyStats = FileParsing.getEnemyStatsFromFile(eName)
     console.log(eName + ":")
-    console.log(getEnemyStats(enemy))
-    var enemyStats = getEnemyStats(enemy)
+    console.log(enemyStats)
     console.log("Base Damage:")
     console.log(regularDamage(enemyStats, partyStats))
     console.log("Damage per turn:")
@@ -105,7 +72,7 @@ var fireGoblin = 'Fire Goblin';
 var livingFire = 'Living Fire';
 var aquaDevil = 'Aqua Boss';
 var enemies = [blueHydra];
-var enemyStats = getStatsAsGroupStats(enemies.map(eName => getEnemyStats(findEnemy(eName))));
+var enemyStats = getStatsAsGroupStats(enemies.map(enemy => FileParsing.getEnemyStatsFromFile(enemy)));
 
 // PARTY DATA
 var lvl = 5
@@ -123,7 +90,7 @@ console.log("TTK: " + enemyStats.hp / totalGroupDPT)
 
 console.log("------------- ENEMY DAMAGE --------------")
 
-var partyStats = getStatsAsGroupStats(party.map(cl => getClassStatsFromFile(cl, lvl)))
+var partyStats = getStatsAsGroupStats(party.map(cl => FileParsing.getClassStatsFromFile(cl, lvl)))
 console.log("party stats")
 console.log(partyStats)
 var rawEnemyDPT = enemies
