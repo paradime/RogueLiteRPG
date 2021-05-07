@@ -15,14 +15,11 @@ var regularDamage = CombatFunctions.regularDamage
 var convertSpeed = function(a) {
     return a.agi/100;
 }
+var sum = (a,b) => a+b;
 
 // Get Class Stats 1
 var printDamage = function(classFile, level, enemyStats) {
     var class1Stats = FileParsing.getClassStatsFromFile(classFile, level)
-    console.log(classFile.className + ":")
-    console.log("Base Damage:")
-    console.log(regularDamage(class1Stats,enemyStats))
-    console.log("Damage per turn:")
     damagePerTurn = (classFile.dptFormula(
         class1Stats,
         enemyStats,
@@ -30,17 +27,16 @@ var printDamage = function(classFile, level, enemyStats) {
         convertSpeed
         )
     )
-    console.log(damagePerTurn + "\n")
+    // console.log(classFile.className + ":")
+    // console.log("Base Damage:")
+    // console.log(regularDamage(class1Stats,enemyStats))
+    // console.log("Damage per turn:")
+    // console.log(damagePerTurn + "\n")
     return damagePerTurn
 }
 
 var printEnemyDamage = function(eName, partyStats) {
     var enemyStats = FileParsing.getEnemyStatsFromFile(eName)
-    console.log(eName + ":")
-    console.log(enemyStats)
-    console.log("Base Damage:")
-    console.log(regularDamage(enemyStats, partyStats))
-    console.log("Damage per turn:")
     damagePerTurn = (BasicEnemy.dptFormula(
         enemyStats,
         partyStats,
@@ -48,7 +44,12 @@ var printEnemyDamage = function(eName, partyStats) {
         convertSpeed
         )
     )
-    console.log(damagePerTurn + "\n")
+    // console.log(eName + ":")
+    // console.log(enemyStats)
+    // console.log("Base Damage:")
+    // console.log(regularDamage(enemyStats, partyStats))
+    // console.log("Damage per turn:")
+    // console.log(damagePerTurn + "\n")
     return damagePerTurn
 }
 
@@ -79,22 +80,56 @@ var lvl = 5
 var party = [HeroClass, SwordsmanClass, RangerClass]
 
 // CALCULATIONS
-console.log("------------- PARTY DAMGE --------------")
+// console.log("------------- PARTY DAMGE --------------")
 var partyDMG = party.map(cl => printDamage(cl, lvl, enemyStats));
 var rawGroupDPT = partyDMG.reduce((a,b)=> a+b, 0);
-console.log("Raw group dpt: " + rawGroupDPT)
 var totalGroupDPT = rawGroupDPT * RangerClass.groupBonusDmg;
-console.log("Total group dpt: " + totalGroupDPT)
-console.log("Bonus DPT: " + (totalGroupDPT - rawGroupDPT))
-console.log("TTK: " + enemyStats.hp / totalGroupDPT)
+// console.log("Raw group dpt: " + rawGroupDPT)
+// console.log("Total group dpt: " + totalGroupDPT)
+// console.log("Bonus DPT: " + (totalGroupDPT - rawGroupDPT))
+// console.log("TTK: " + enemyStats.hp / totalGroupDPT)
 
-console.log("------------- ENEMY DAMAGE --------------")
+//console.log("------------- ENEMY DAMAGE --------------")
 
 var partyStats = getStatsAsGroupStats(party.map(cl => FileParsing.getClassStatsFromFile(cl, lvl)))
-console.log("party stats")
-console.log(partyStats)
 var rawEnemyDPT = enemies
     .map(e => printEnemyDamage(e, partyStats))
-    .reduce((a,b) => a+b, 0);
-console.log("Raw Enemy dpt: " + rawEnemyDPT);
-console.log("TTK: " + partyStats.hp / rawEnemyDPT)
+    .reduce(sum, 0);
+// console.log("party stats")
+// console.log(partyStats)
+// console.log("Raw Enemy dpt: " + rawEnemyDPT);
+// console.log("TTK: " + partyStats.hp / rawEnemyDPT)
+
+var getPartyCalculations = function(partyArr, lvl, enemyArr) {
+    var enemyStats = getStatsAsGroupStats(enemyArr.map(enemy => FileParsing.getEnemyStatsFromFile(enemy)));
+    var partyDMG = partyArr.map(cl => printDamage(cl, lvl, enemyStats));
+    var rawGroupDPT = partyDMG.reduce(sum, 0);
+    var bonusMult = partyArr.find((cl) => cl === RangerClass) ? RangerClass.groupBonusDmg : 1;
+    var totalGroupDPT = rawGroupDPT * bonusMult;
+    var bonusDPT = totalGroupDPT - rawGroupDPT
+    var ttk = enemyStats.hp / totalGroupDPT
+    return {
+        rawPartyDPT: rawGroupDPT,
+        totalPartyDPT: totalGroupDPT,
+        bonusDPT: bonusDPT,
+        ttk: ttk
+    }
+}
+var getEnemyCalculations = function(partyArr, lvl, enemyArr) {
+    var partyStats = getStatsAsGroupStats(partyArr.map(cl => FileParsing.getClassStatsFromFile(cl, lvl)))
+    var rawEnemyDPT = enemyArr
+        .map(e => printEnemyDamage(e, partyStats))
+        .reduce(sum, 0);
+    return {
+        rawEnemyDPT: rawEnemyDPT,
+        ttk: partyStats.hp / rawEnemyDPT
+    }
+}
+
+var CombatSimulation = function(partyArr, lvl, enemyArr, log=false) {
+    return {
+        partyCalculations: getPartyCalculations(partyArr, lvl, enemyArr),
+        enemyCalculations: getEnemyCalculations(partyArr, lvl, enemyArr)
+    }
+}
+module.exports = {CombatSimulation}
