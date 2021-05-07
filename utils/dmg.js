@@ -96,19 +96,19 @@ var getStatsAsGroupStats = function(enemiesArr) {
  * Script
  */
 // ENEMY DATA
-var enemyName1 = 'Blue Wolf';
-var enemyName2 = 'Blue Crab';
-var enemyName3 = 'Evil Tree';
-var enemyName4 = 'Blue Hydra';
+var blueWolf = 'Blue Wolf';
+var blueCrab = 'Blue Crab';
+var evilTree = 'Evil Tree';
+var blueHydra = 'Blue Hydra';
 var redLizard = 'Red Lizard';
 var fireGoblin = 'Fire Goblin';
 var livingFire = 'Living Fire';
 var aquaDevil = 'Aqua Boss';
-var enemies = [aquaDevil, redLizard, fireGoblin];
+var enemies = [blueHydra];
 var enemyStats = getStatsAsGroupStats(enemies.map(eName => getEnemyStats(findEnemy(eName))));
 
 // PARTY DATA
-var lvl = 8
+var lvl = 5
 var party = [HeroClass, SwordsmanClass, RangerClass]
 
 // CALCULATIONS
