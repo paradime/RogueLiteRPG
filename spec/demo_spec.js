@@ -37,6 +37,21 @@ describe("Combat Functions", function() {
     })
   })
 
+  describe("apply elemental weaknesses", () => {
+    it("applies the appropriate weaknesses", () => {
+      const trait = {code: 13, dataId: 63}
+      const enemy1 = {
+        _enemyId: 0, 
+        traits: [trait], 
+        addNewState: jasmine.createSpy('addNewState')
+      }
+      const gameTroop = { _enemies: [enemy1] }
+      const dataEnemies = [enemy1]
+      CombatFunctions.applyElementalWeaknesses(gameTroop, dataEnemies)
+      expect(enemy1.addNewState).toHaveBeenCalledOnceWith(63)
+    })
+  })
+
   describe("Rogue", () => {
     describe("shadow strike", () => {
       it("calculates correctly", () => {

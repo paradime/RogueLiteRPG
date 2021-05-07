@@ -101,3 +101,12 @@ hpToAdd += this.states().find(st => st.id === 33) ? $gameVariables._data[102] : 
                     this.startDamagePopup();
                     $gameTemp.requestBattleRefresh();
                 }
+
+for(var enemy of $gameTroop._enemies) {
+    traits = $dataEnemies[enemy._enemyId].traits
+    for(var trait of traits) {
+        if (trait.code === 13) {
+            enemy.addNewState(trait.dataId)
+        }
+    }
+}
