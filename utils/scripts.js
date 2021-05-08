@@ -110,3 +110,34 @@ for(var enemy of $gameTroop._enemies) {
         }
     }
 }
+
+
+// Initialize Choices Array
+var choicez = ["choice1", "choice2", "choice3", "choice4"];
+// Set Message Choices
+$gameMessage.setChoices(choicez, 0, -1);
+// Set Message Background
+$gameMessage.setChoiceBackground(0);
+// Set Message Position
+$gameMessage.setChoicePositionType(1);
+// Record Outcome in a Variable
+$gameMessage.setChoiceCallback(n => {
+    console.log(n)
+    console.log(choicez)
+    //this._branch[this._indent] = n;
+    // $gameVariables.setValue(variableIndex, n);
+});
+
+// You must add this in a new script call
+this.setWaitMode("message");
+
+var partyMembersToAdd = [1,2,3,4,6,7,8]
+for(var actorId of $gameParty._actors) {
+    partyMembersToAdd = partyMembersToAdd.filter(p => p != actorId)
+}
+if($gameSwitches._data[5] !== true) {
+    partyMembersToAdd = partyMembersToAdd.filter(p => p != 2);
+}
+var rnd = Math.floor(Math.random() * partyMembersToAdd.length)
+console.log(partyMembersToAdd)
+$gameVariables.setValue(7,partyMembersToAdd[rnd]);
