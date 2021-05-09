@@ -15,11 +15,11 @@ null,
 {"id":13,"expanded":false,"name":"MAP2-1 (m) (Dungeon 1)","order":13,"parentId":12,"scrollX":0,"scrollY":0},
 {"id":14,"expanded":true,"name":"MAP0-2 (save) (Dungeon 1)","order":15,"parentId":11,"scrollX":0,"scrollY":0},
 {"id":15,"expanded":true,"name":"MAP0-3 (boss) (Dungeon 1)","order":16,"parentId":14,"scrollX":0,"scrollY":0},
-{"id":16,"expanded":false,"name":"Hubworld","order":17,"parentId":0,"scrollX":811,"scrollY":453},
-{"id":17,"expanded":true,"name":"Volcano","order":18,"parentId":0,"scrollX":1319,"scrollY":717},
-{"id":18,"expanded":false,"name":"BST Forest","order":21,"parentId":0,"scrollX":1216.5,"scrollY":4108.5},
+{"id":16,"expanded":false,"name":"Hubworld","order":17,"parentId":0,"scrollX":1390.2857142857142,"scrollY":790.2857142857142},
+{"id":17,"expanded":true,"name":"Volcano","order":18,"parentId":0,"scrollX":1390.2222222222222,"scrollY":824.8888888888889},
+{"id":18,"expanded":false,"name":"BST Forest","order":21,"parentId":0,"scrollX":819,"scrollY":4109},
 {"id":19,"expanded":false,"name":"MAP-1-1 (tr) (Dungeon 1)","order":14,"parentId":11,"scrollX":0,"scrollY":0},
 {"id":20,"expanded":true,"name":"Volcano Safe Zone","order":19,"parentId":17,"scrollX":811,"scrollY":453},
 null,
-{"id":22,"expanded":true,"name":"Volcano Boss Zone","order":20,"parentId":20,"scrollX":811,"scrollY":453}
+{"id":22,"expanded":true,"name":"Volcano Boss Zone","order":20,"parentId":20,"scrollX":720.8888888888889,"scrollY":402.6666666666667}
 ]

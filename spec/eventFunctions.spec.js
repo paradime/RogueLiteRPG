@@ -35,4 +35,4 @@ describe('Event Functions', () => {
   })
 })
 
-var emptyArr = () => [...Array(6).keys()].map(k => undefined);
+var emptyArr = () => [...Array(10).keys()].map(k => undefined);

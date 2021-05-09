@@ -36,6 +36,38 @@ var addRandomPartyMember = function(gameVariables, gameSwitches, gameParty) {
   gameVariables.setValue(VARIABLE_PARTY_MEMBER_TO_ADD, pickedPartyMember)
 }
 
+var autoAnalyzeEquipped = function(gameActors) {
+  return undefined != gameActors._data.find(a => {
+    if (a == undefined) { return false; }
+    return a.equips().find(e => {
+      if (e == undefined) { return false; }
+      return e.id === 105
+    });
+  });
+}
+
+var autoAnalyze = function(gameActors, gameSwitches) {
+  const SWITCH_ANALYZE = 7
+  gameSwitches.setValue(SWITCH_ANALYZE, autoAnalyzeEquipped(gameActors));
+}
+
+var setUnaddedXp = function(gameVariables, gameTroop, dataEnemies) {
+  const VARIABLE_UNADDED_XP = 2
+  var unaddedXp = 0;
+  gameVariables.setValue(VARIABLE_UNADDED_XP, unaddedXp)
+  gameTroop._enemies.forEach(enemy => {
+    enemyData = dataEnemies[enemy._enemyId]
+    if(enemy._hp === 0) { // full credit
+      unaddedXp += enemyData.exp
+    } else { // partial credit
+      unaddedXp += Math.round(
+        (1-(enemy._hp / enemy.mhp)) * (enemyData.exp/2)
+      );
+    }
+  })
+  gameVariables.setValue(VARIABLE_UNADDED_XP, unaddedXp);
+}
+
 const EventFunctions = {
   partyMembers: [
     HERO_ID,
@@ -50,7 +82,9 @@ const EventFunctions = {
   generateFilterPartyMembers: generateFilterPartyMembers,
   filterRandomPartyMember: filterRandomPartyMember,
   pickRandomPartyMember: pickRandomPartyMember,
-  addRandomPartyMember: addRandomPartyMember
+  addRandomPartyMember: addRandomPartyMember,
+  autoAnalyze: autoAnalyze,
+  setUnaddedXp: setUnaddedXp
 }
 
 module.exports = EventFunctions

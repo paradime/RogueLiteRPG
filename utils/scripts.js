@@ -141,3 +141,12 @@ if($gameSwitches._data[5] !== true) {
 var rnd = Math.floor(Math.random() * partyMembersToAdd.length)
 console.log(partyMembersToAdd)
 $gameVariables.setValue(7,partyMembersToAdd[rnd]);
+
+$gameVariables.setValue(2, 0)
+var unaddedXp = 0;
+for(var enemy of $gameTroop._enemies) { 
+    if(enemy._hp === 0) {
+        unaddedXp += $dataEnemies[enemy._enemyId].exp
+    }
+}
+$gameVariables.setValue(2, unaddedXp);

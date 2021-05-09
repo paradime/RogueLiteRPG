@@ -41,7 +41,43 @@ describe("Damage Calculations", () => {
     const redLizard = 'Red Lizard';
     const fireGoblin = 'Fire Goblin';
     const livingFire = 'Living Fire';
+    const redWorm = 'Red Worm';
+    const phoenixGoblin = 'Phoenix Goblin';
+    const treasureOgre = 'Fireproof Treasure Ogre'
 
+    describe("trash", () => {
+      it("red worm 1 is winnable", () => {
+        const enemies = [redWorm]
+        const level = 9;
+        const turnAdjustment = 4;
+        const sim = dmg.CombatSimulation(party, level, enemies)
+        isTuned(sim, turnAdjustment)
+      })
+
+      it("red worm 1 is winnable", () => {
+        const enemies = [redWorm]
+        const level = 9;
+        const turnAdjustment = 4;
+        const sim = dmg.CombatSimulation(party, level, enemies)
+        isTuned(sim, turnAdjustment)
+      })
+
+      it("fire proof ogre is winnable", () => {
+        const enemies = [treasureOgre, treasureOgre]
+        const level = 10;
+        const turnAdjustment = 3;
+        const sim = dmg.CombatSimulation(party, level, enemies)
+        isTuned(sim, turnAdjustment)
+      })
+
+      it("red worm 2 is winnable", () => {
+        const enemies = [redWorm, redWorm]
+        const level = 12;
+        const turnAdjustment = 1;
+        const sim = dmg.CombatSimulation(party, level, enemies)
+        isTuned(sim, turnAdjustment)
+      })
+    })
     describe("miniboss 1", () => {
       it("is winnable", () => {
         const aquaBoss = 'Aqua Boss';
@@ -51,6 +87,57 @@ describe("Damage Calculations", () => {
         const sim = dmg.CombatSimulation(party, level, enemies)
         isTuned(sim, turnAdjustment)
       })
+    })
+
+    describe("miniboss 2", () => {
+      it("is winnable", () => {
+        const pyrix = 'Pyrix';
+        const enemies = [pyrix]
+        const level = 11;
+        const turnAdjustment = 2;
+        const sim = dmg.CombatSimulation(party, level, enemies)
+        isTuned(sim, turnAdjustment)
+      })
+    })
+
+    describe("miniboss 3", () => {
+      it("red goblins is winnable", () => {
+        const enemies = [phoenixGoblin, phoenixGoblin]
+        const level = 13;
+        const sim = dmg.CombatSimulation(party, level, enemies)
+        expect(sim.partyCalculations.ttk).toBeGreaterThan(3)
+        expect(sim.partyCalculations.ttk).toBeLessThan(5)
+      })
+      it("is winnable", () => {
+        const phoenix = 'Phoenix'
+        const enemies1 = [phoenix]
+        const enemies2 = [fireGoblin, fireGoblin]
+        const level = 13;
+        const turnAdjustment = 1;
+        const sim1 = dmg.CombatSimulation(party, level, enemies1)
+        const sim2 = dmg.CombatSimulation(party, level, enemies2)
+        const totalSim = {
+          partyCalculations: {
+            ttk: (sim1.partyCalculations.ttk * 2) + sim2.partyCalculations.ttk
+          },
+          enemyCalculations: {
+            ttk: (sim1.enemyCalculations.ttk/2) // 2 phoenixs
+          }
+        }
+        isTuned(totalSim, turnAdjustment)
+      })
+    })
+
+    describe("boss", () => {
+      it("is winnable", () => {
+        const redDragon = 'Red Dragon';
+        const enemies = [redDragon]
+        const level = 14;
+        const turnAdjustment = 2;
+        const sim = dmg.CombatSimulation(party, level, enemies, true)
+        isTuned(sim, turnAdjustment)
+      })
+
     })
   })
 })

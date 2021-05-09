@@ -95,10 +95,6 @@ var party = [HeroClass, SwordsmanClass, RangerClass]
 // var rawEnemyDPT = enemies
 //     .map(e => printEnemyDamage(e, partyStats))
 //     .reduce(sum, 0);
-// console.log("party stats")
-// console.log(partyStats)
-// console.log("Raw Enemy dpt: " + rawEnemyDPT);
-// console.log("TTK: " + partyStats.hp / rawEnemyDPT)
 
 var getPartyCalculations = function(partyArr, lvl, enemyArr) {
     var enemyStats = getStatsAsGroupStats(enemyArr.map(enemy => FileParsing.getEnemyStatsFromFile(enemy)));
@@ -121,15 +117,32 @@ var getEnemyCalculations = function(partyArr, lvl, enemyArr) {
         .map(e => printEnemyDamage(e, partyStats))
         .reduce(sum, 0);
     return {
+        partyStats: partyStats,
         rawEnemyDPT: rawEnemyDPT,
         ttk: partyStats.hp / rawEnemyDPT
     }
 }
 
 var CombatSimulation = function(partyArr, lvl, enemyArr, log=false) {
-    return {
+    combatSim = {
         partyCalculations: getPartyCalculations(partyArr, lvl, enemyArr),
         enemyCalculations: getEnemyCalculations(partyArr, lvl, enemyArr)
     }
+    if (log) { logStats(combatSim) }
+    return combatSim
+}
+
+var logStats = function(combatSim) {
+    console.log("------------- PARTY DAMGE --------------")
+    console.log("Raw group dpt: " + combatSim.partyCalculations.rawPartyDPT)
+    console.log("Total group dpt: " + combatSim.partyCalculations.totalPartyDPT)
+    console.log("Bonus DPT: " + combatSim.partyCalculations.bonusDPT)
+    console.log("TTK: " + combatSim.partyCalculations.ttk)
+    console.log("------------- ENEMY DAMAGE --------------")
+    console.log("Party stats:")
+    console.log(combatSim.enemyCalculations.partyStats)
+    console.log("Raw Enemy dpt: " + combatSim.enemyCalculations.rawEnemyDPT);
+    console.log("TTK: " + combatSim.enemyCalculations.ttk)
+
 }
 module.exports = {CombatSimulation}
