@@ -51,6 +51,17 @@ var autoAnalyze = function(gameActors, gameSwitches) {
   gameSwitches.setValue(SWITCH_ANALYZE, autoAnalyzeEquipped(gameActors));
 }
 
+var analyzeFunction = function(gameTroop, gameMessage) {
+  for(var enemy of gameTroop._enemies) { 
+    gameMessage.setBackground(1);
+    gameMessage.setPositionType(2);
+    const percentLeft = Math.round((enemy._hp / enemy.mhp)*100)
+    gameMessage.add(
+        `${enemy.name()}${enemy._letter} has ${enemy._hp}(${percentLeft}%) hp left!`
+    )
+  }
+}
+
 var setUnaddedXp = function(gameVariables, gameTroop, dataEnemies) {
   const VARIABLE_UNADDED_XP = 2
   var unaddedXp = 0;
@@ -84,7 +95,8 @@ const EventFunctions = {
   pickRandomPartyMember: pickRandomPartyMember,
   addRandomPartyMember: addRandomPartyMember,
   autoAnalyze: autoAnalyze,
-  setUnaddedXp: setUnaddedXp
+  setUnaddedXp: setUnaddedXp,
+  analyzeFunction: analyzeFunction
 }
 
 module.exports = EventFunctions

@@ -150,3 +150,18 @@ for(var enemy of $gameTroop._enemies) {
     }
 }
 $gameVariables.setValue(2, unaddedXp);
+
+
+for(var enemy of $gameTroop._enemies) { 
+    $gameMessage.setBackground(1);
+    $gameMessage.setPositionType(2);
+    const percentLeft = Math.round((enemy._hp / enemy.mhp)*100)
+    $gameMessage.add(
+        `${enemy.name()}${enemy._letter} has ${enemy._hp}(${percentLeft}%) hp left!`
+    )
+}
+
+
+actorLocation = 1
+$gameActors._data[actorLocation]._classId
+$dataClasses[classId].learnings.forEach( skill => $gameActors._data[actorLocation].forgetSkill(skill.skillId))
