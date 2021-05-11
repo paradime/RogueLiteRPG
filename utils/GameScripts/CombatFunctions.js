@@ -28,7 +28,8 @@ const CombatFunctions = {
         flashOfLight: (a) => a.mat
     },
     swordsman: {
-        enrage: (a) => a.mhp * .05
+        enrage: (a) => a.mhp * .05,
+        execute: (a,b) => (b.hp <= b.mhp*.3) ? regularDmg(a,b) * 3 : regularDmg(a,b) * 1.5
     },
     ranger: {
         aimedShot: (a,b) => regularDmg(a,b) * 5
@@ -36,6 +37,9 @@ const CombatFunctions = {
     cleric: {
         flashHeal: (a) => a.mat,
         holyLight: (a) => a.mat * 3
+    },
+    templar: {
+        hammerOfWrath: (a,b) => (b.hp <= b.mhp*.3) ? regularMagicDmg(a,b) * 3 : 0
     },
     commonEvents: {
         calculateHots: function() {
