@@ -86,6 +86,11 @@ var setUnaddedXp = function(gameVariables, gameTroop, dataEnemies) {
   gameVariables.setValue(VARIABLE_UNADDED_XP, unaddedXp);
 }
 
+var unlearnAllClassSkillsForActor = function(actorId, dataClasses, gameActors) {
+  var classId = gameActors._data[actorId]._classId
+  dataClasses[classId].learnings.forEach( skill => gameActors._data[actorId].forgetSkill(skill.skillId))
+}
+
 const EventFunctions = {
   partyMembers: [
     HERO_ID,
@@ -103,7 +108,8 @@ const EventFunctions = {
   addRandomPartyMember: addRandomPartyMember,
   autoAnalyze: autoAnalyze,
   setUnaddedXp: setUnaddedXp,
-  analyzeFunction: analyzeFunction
+  analyzeFunction: analyzeFunction,
+  unlearnAllClassSkillsForActor: unlearnAllClassSkillsForActor
 }
 
   window.EventFunctions = EventFunctions
