@@ -22,6 +22,10 @@ const CombatFunctions = {
             })
         })
     },
+    items: {
+        dungeon1Elemental: (a) => (a.hp * .2 >= 16) ? (a.hp) * .2 : 16,
+        dungeon2Elemental: (a) => (a.hp * .2 >= 35) ? (a.hp) * .2 : 35
+    },
     rogue: {
         shadowStrike: (a,b) => CombatFunctions.regularDamage(a,b) * 1.1,
         eviscerate: (a,b) => CombatFunctions.regularDamage(a,b) * 4
