@@ -161,7 +161,8 @@ for(var enemy of $gameTroop._enemies) {
     )
 }
 
-
-actorLocation = 1
-$gameActors._data[actorLocation]._classId
-$dataClasses[classId].learnings.forEach( skill => $gameActors._data[actorLocation].forgetSkill(skill.skillId))
+// unlearn all skills from current class
+// (actorId) -> {executeUnlearning}
+var actorId=1;
+var classId = $gameActors._data[actorId]._classId
+$dataClasses[classId].learnings.forEach( skill => $gameActors._data[actorId].forgetSkill(skill.skillId))

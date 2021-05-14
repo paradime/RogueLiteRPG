@@ -56,7 +56,7 @@ describe("Damage Calculations", () => {
 
       it("red worm 1 is winnable", () => {
         const enemies = [redWorm]
-        const level = 9;
+        const level = 10;
         const turnAdjustment = 4;
         const sim = dmg.CombatSimulation(party, level, enemies)
         isTuned(sim, turnAdjustment)
@@ -72,7 +72,7 @@ describe("Damage Calculations", () => {
 
       it("red worm 2 is winnable", () => {
         const enemies = [redWorm, redWorm]
-        const level = 12;
+        const level = 13;
         const turnAdjustment = 1;
         const sim = dmg.CombatSimulation(party, level, enemies)
         isTuned(sim, turnAdjustment)
@@ -82,7 +82,7 @@ describe("Damage Calculations", () => {
       it("is winnable", () => {
         const aquaBoss = 'Aqua Boss';
         const enemies = [aquaBoss, redLizard, fireGoblin]
-        const level = 8;
+        const level = 9;
         const turnAdjustment = 4;
         const sim = dmg.CombatSimulation(party, level, enemies)
         isTuned(sim, turnAdjustment)
@@ -132,9 +132,9 @@ describe("Damage Calculations", () => {
       it("is winnable", () => {
         const redDragon = 'Red Dragon';
         const enemies = [redDragon]
-        const level = 14;
-        const turnAdjustment = 2;
-        const sim = dmg.CombatSimulation(party, level, enemies, true)
+        const level = 15;
+        const turnAdjustment = 0; // this should be 0?
+        const sim = dmg.CombatSimulation(party, level, enemies)
         isTuned(sim, turnAdjustment)
       })
 

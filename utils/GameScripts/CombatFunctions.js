@@ -1,9 +1,11 @@
+const STATE_JUDGEMENT_CD = 102
 const regularDmg = (a, b) => a.atk - (b.def/2)
 const regularMagicDmg = (a, b) => a.mat - (b.mdf/2)
 
 const CombatFunctions = {
     regularDamage: regularDmg,
     regularMagicDamage: regularMagicDmg,
+    regularShootDamage: (a, b) => regularMagicDmg(a,b) * (3/5),
     aoeRegularPhysDamage: (a,b) => regularDmg(a,b) * (3/4),
     aoeRegularMagicDamage: (a,b) => regularMagicDmg(a,b) * (3/4),
     applyElementalWeaknesses: (gameTroop, dataEnemies) => {
@@ -17,7 +19,7 @@ const CombatFunctions = {
     },
     items: {
         dungeon1Elemental: (a) => (a.hp * .2 >= 16) ? (a.hp) * .2 : 16,
-        dungeon2Elemental: (a) => (a.hp * .2 >= 35) ? (a.hp) * .2 : 35
+        dungeon2Elemental: (a) => (a.hp * .15 >= 35) ? (a.hp) * .15 : 35
     },
     rogue: {
         shadowStrike: (a,b) => CombatFunctions.regularDamage(a,b) * 1.1,
@@ -43,7 +45,19 @@ const CombatFunctions = {
         holyLight: (a) => a.mat * 3
     },
     templar: {
+        judgement: (a,b) => {
+            a.addState(STATE_JUDGEMENT_CD);
+            return regularMagicDmg(a,b);
+        },
         hammerOfWrath: (a,b) => (b.hp <= b.mhp*.3) ? regularMagicDmg(a,b) * 3 : 0
+    },
+    redmage: {
+        mpGainRegularMagicDamage: (a,b) => {
+            a.gainMp(25)
+            return regularMagicDmg(a,b)
+        },
+        lunarEclipse: (a,b) => regularMagicDmg(a,b) * 3,
+        solarEclipse: (a,b) => CombatFunctions.aoeRegularMagicDamage(a,b) * 3
     },
     commonEvents: {
         calculateHots: function() {
