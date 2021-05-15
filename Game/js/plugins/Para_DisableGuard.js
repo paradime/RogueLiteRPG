@@ -21,11 +21,11 @@
     /**
      * Skip title screen
      */
-    Scene_Boot.prototype.startNormalGame = function() {
-        this.checkPlayerLocation();
-        DataManager.setupNewGame();
-        SceneManager.goto(Scene_Map);
-    };
+    // Scene_Boot.prototype.startNormalGame = function() {
+    //     this.checkPlayerLocation();
+    //     DataManager.setupNewGame();
+    //     SceneManager.goto(Scene_Map);
+    // };
 
     /**
      * Change Speed function to be linear instead of the default sqrt

@@ -101,3 +101,68 @@ hpToAdd += this.states().find(st => st.id === 33) ? $gameVariables._data[102] : 
                     this.startDamagePopup();
                     $gameTemp.requestBattleRefresh();
                 }
+
+for(var enemy of $gameTroop._enemies) {
+    traits = $dataEnemies[enemy._enemyId].traits
+    for(var trait of traits) {
+        if (trait.code === 13) {
+            enemy.addNewState(trait.dataId)
+        }
+    }
+}
+
+
+// Initialize Choices Array
+var choicez = ["choice1", "choice2", "choice3", "choice4"];
+// Set Message Choices
+$gameMessage.setChoices(choicez, 0, -1);
+// Set Message Background
+$gameMessage.setChoiceBackground(0);
+// Set Message Position
+$gameMessage.setChoicePositionType(1);
+// Record Outcome in a Variable
+$gameMessage.setChoiceCallback(n => {
+    console.log(n)
+    console.log(choicez)
+    //this._branch[this._indent] = n;
+    // $gameVariables.setValue(variableIndex, n);
+});
+
+// You must add this in a new script call
+this.setWaitMode("message");
+
+var partyMembersToAdd = [1,2,3,4,6,7,8]
+for(var actorId of $gameParty._actors) {
+    partyMembersToAdd = partyMembersToAdd.filter(p => p != actorId)
+}
+if($gameSwitches._data[5] !== true) {
+    partyMembersToAdd = partyMembersToAdd.filter(p => p != 2);
+}
+var rnd = Math.floor(Math.random() * partyMembersToAdd.length)
+console.log(partyMembersToAdd)
+$gameVariables.setValue(7,partyMembersToAdd[rnd]);
+
+$gameVariables.setValue(2, 0)
+var unaddedXp = 0;
+for(var enemy of $gameTroop._enemies) { 
+    if(enemy._hp === 0) {
+        unaddedXp += $dataEnemies[enemy._enemyId].exp
+    }
+}
+$gameVariables.setValue(2, unaddedXp);
+
+
+for(var enemy of $gameTroop._enemies) { 
+    $gameMessage.setBackground(1);
+    $gameMessage.setPositionType(2);
+    const percentLeft = Math.round((enemy._hp / enemy.mhp)*100)
+    $gameMessage.add(
+        `${enemy.name()}${enemy._letter} has ${enemy._hp}(${percentLeft}%) hp left!`
+    )
+}
+
+// unlearn all skills from current class
+// (actorId) -> {executeUnlearning}
+var actorId=1;
+var classId = $gameActors._data[actorId]._classId
+$dataClasses[classId].learnings.forEach( skill => $gameActors._data[actorId].forgetSkill(skill.skillId))

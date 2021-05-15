@@ -1,4 +1,4 @@
-var CombatFunctions = require('./testFile');
+var CombatFunctions = require('../utils/GameScripts/CombatFunctions');
 describe("Combat Functions", function() {
 
   describe("regular damage", () => {
@@ -34,6 +34,21 @@ describe("Combat Functions", function() {
       b = {mdf: 10};
       result = CombatFunctions.aoeRegularMagicDamage(a, b);
       expect(result).toBe(60);
+    })
+  })
+
+  describe("apply elemental weaknesses", () => {
+    it("applies the appropriate weaknesses", () => {
+      const trait = {code: 13, dataId: 63}
+      const enemy1 = {
+        _enemyId: 0, 
+        traits: [trait], 
+        addNewState: jasmine.createSpy('addNewState')
+      }
+      const gameTroop = { _enemies: [enemy1] }
+      const dataEnemies = [enemy1]
+      CombatFunctions.applyElementalWeaknesses(gameTroop, dataEnemies)
+      expect(enemy1.addNewState).toHaveBeenCalledOnceWith(63)
     })
   })
 
